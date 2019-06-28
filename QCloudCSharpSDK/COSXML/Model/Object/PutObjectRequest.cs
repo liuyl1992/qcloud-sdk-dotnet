@@ -1,4 +1,4 @@
-﻿using COSXML.Common;
+using COSXML.Common;
 using System.IO;
 using COSXML.Model.Tag;
 using COSXML.Utils;
@@ -42,7 +42,7 @@ namespace COSXML.Model.Object
         /// <param name="key"></param>
         /// <param name="srcPath"></param>
         public PutObjectRequest(string bucket, string key, string srcPath)
-            :this(bucket, key, srcPath, -1L, -1L)
+            : this(bucket, key, srcPath, -1L, -1L)
         {
 
         }
@@ -55,7 +55,7 @@ namespace COSXML.Model.Object
         /// <param name="fileOffset">文件指定起始位置</param>
         /// <param name="needSendLength">文件指定内容长度</param>
         public PutObjectRequest(string bucket, string key, string srcPath, long fileOffset, long needSendLength)
-            :base(bucket, key)
+            : base(bucket, key)
         {
             this.method = CosRequestMethod.PUT;
             this.srcPath = srcPath;
@@ -124,6 +124,16 @@ namespace COSXML.Model.Object
                 SetRequestHeader(CosRequestHeaderKey.X_COS_ACL, cosACL);
             }
         }
+
+        /// <summary>
+        /// 设置对象的存储类型
+        /// </summary>
+        /// <param name="cosACL"></param>
+        public void SetCosStorageClass(string cosStorageClass)
+        {
+            SetRequestHeader(CosRequestHeaderKey.X_COS_STORAGE_CLASS_, cosStorageClass);
+        }
+
         /// <summary>
         /// 定义 Object 的 acl 属性。有效值：private，public-read-write，public-read；默认值：private
         /// <see cref="Common.CosACL"/>
